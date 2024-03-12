@@ -1,8 +1,8 @@
-from abc import ABC, abstract_method
+from abc import ABC, abstractmethod
 
 
 class Llm(ABC):
-    @abstract_method
+    @abstractmethod
     def respond(self, prompt: str) -> str:
         """Respond to a prompt"""
         raise NotImplementedError
