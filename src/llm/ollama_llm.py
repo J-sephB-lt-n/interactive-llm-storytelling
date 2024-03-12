@@ -15,4 +15,4 @@ class OllamaLlm(Llm):
                     "content": prompt,
                 },
             ],
-        )
+        )["message"]["content"]

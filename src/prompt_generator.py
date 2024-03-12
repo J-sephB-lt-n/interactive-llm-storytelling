@@ -1,4 +1,3 @@
-
 class PromptGenerator:
     def __init__(self) -> None:
         self.parts: dict[str, str] = {
@@ -22,5 +21,17 @@ class PromptGenerator:
             self.parts["global_story_style"] += "."
         self.parts["global_story_style"] += " "
 
-    def generate_new_location_name(self, prev_location) -> str:
-        pass
+    def generate_location_name(self, prev_location=None) -> str:
+        if prev_location is None:
+            return (
+                self.parts["global_init"]
+                + self.parts["global_story_style"]
+                + "Please generate the name of a physical "
+                + "location that would make sense appearing "
+                + "in this story. "
+                + "The location must be not smaller than a car and not bigger than a building. "
+                + "Please include only the location name - no additional description please. "
+            )
+
+    def generate_location_description(location_name: str) -> str:
+        return self.parts["global_init"]
