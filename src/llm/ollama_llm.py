@@ -1,6 +1,6 @@
 import ollama
 
-from src.llm.llm import Llm
+from src.llm import Llm 
 
 class OllamaLlm(Llm):
     def __init__(self, model_name: str) -> None:
