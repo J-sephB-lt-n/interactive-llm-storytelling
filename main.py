@@ -23,6 +23,10 @@ if __name__ == "__main__":
     current_location: src.obj.Location = src.world_creation.generate_locations(
         n_locations=config.N_LOCATIONS, prompt_generator=prompt_generator, llm=llm
     )
-    player_choice = "describe_current_location"
+    player_choice = None
     while player_choice != "exit":
-        player_choice = src.game_state.run_game_step(player_choice)
+        current_location, player_choice = src.game_state.update_game_state(
+            current_location=current_location,
+            prompt_generator=prompt_generator,
+            llm=llm,
+        )
