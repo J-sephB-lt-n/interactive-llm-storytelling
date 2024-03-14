@@ -45,4 +45,24 @@ class PromptGenerator:
             + "What do I hear? "
             + "What do I smell? "
             + "How do I feel? "
+            + "Who is here? "
+        )
+
+    def generate_response_to_user_action(
+        self,
+        location_name: str,
+        location_description: str,
+        user_action_description: str,
+    ) -> str:
+        user_action_description = user_action_description.strip()
+        if user_action_description[-1] != ".":
+            user_action_description += "."
+        return (
+            self.parts["global_init"]
+            + self.parts["global_story_style"]
+            + self.parts["perspective"]
+            + f'I am currently in location "{location_name}". '
+            + f'The current description of my location is as follows:\n"{location_description}"\n'
+            + f'I attempt the following action: "{user_action_description}".\n'
+            + "Please describe in 3 sentences how my environment responds to my action (if at all). "
         )

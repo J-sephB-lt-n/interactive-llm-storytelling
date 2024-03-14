@@ -1,3 +1,4 @@
+import itertools
 import logging
 import math
 import random
@@ -39,7 +40,9 @@ def generate_locations(
     MAX_N_EDGES_PER_LOCATION: Final[int] = 3
     CREATE_NEW_EDGE_PROB: Final[float] = 1.0
     current_location: Location = unjoined_locations.pop(0)
+    counter = itertools.count()
     while len(unjoined_locations) > 0:
+        logger.debug("joining locations: iteration %s", f"{next(counter):,}")
         if len(current_location.adjacent_locations) >= MAX_N_EDGES_PER_LOCATION or (
             len(current_location.adjacent_locations) > 0
             and random.uniform(0, 1) > CREATE_NEW_EDGE_PROB
@@ -49,6 +52,5 @@ def generate_locations(
             location_to_join: Location = unjoined_locations.pop(0)
             current_location.adjacent_locations.append(location_to_join)
             location_to_join.adjacent_locations.append(current_location)
-            current_location = location_to_join
 
     return current_location

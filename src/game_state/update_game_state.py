@@ -11,10 +11,12 @@ def update_game_state(
     and returns updated game state
     """
     if current_location.description is None:
-        current_location.description = llm.respond(
-            prompt_generator.generate_location_description(current_location.name)
+        prompt: str = prompt_generator.generate_location_description(
+            current_location.name
         )
-    print("\033c", end="", flush=True) # clear terminal
+        logger.debug('Prompt:\n"%s"', prompt)
+        current_location.description = llm.respond(prompt)
+    print("\033c", end="", flush=True)  # clear terminal
     print(
         f"""-- Current location --
 [{current_location.name}]
@@ -33,4 +35,14 @@ Travel to [{location.name}]
     if player_choice.isdigit():
         return current_location.adjacent_locations[int(player_choice)], player_choice
 
-    return current_state, player_choice
+    if player_choice != "exit":
+        prompt: str = prompt_generator.generate_response_to_user_action(
+            location_name=current_location.name,
+            location_description=current_location.description,
+            user_action_description=player_choice,
+        )
+        logger.debug('Prompt:\n"%s"', prompt)
+        print(llm.respond(prompt))
+        _: str = input("Please press enter to continue")
+
+    return current_location, player_choice
