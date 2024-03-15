@@ -15,9 +15,9 @@ class PromptGenerator:
             "style of the story "
             "(and add any other details/requirements you like) "
             "Examples: \n"
-            "   The story is a horror story set in the dystopian future.\n"
-            "   The story takes place in the mind of a man who is slowly going mad.\n"
+            "   The story takes place in the mind of a businessman who is slowly going mad.\n"
             "   The story is a modern zombie story set in a bustling township in South Africa.\n"
+            "   The story is classic fantasy (dragons, ogres, orcs, goblins, elves etc.)\n"
             "   The story is science fiction with an industrial feel.\n"
         ).strip()
         if self.parts["global_story_style"][-1] != ".":

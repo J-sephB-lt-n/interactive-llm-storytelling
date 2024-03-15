@@ -1,7 +1,10 @@
+import logging
+
 from src.obj import Location
 from src.llm import Llm
 from src.prompting.prompt_generator import PromptGenerator
 
+logger = logging.getLogger(__name__)
 
 def update_game_state(
     current_location: Location, prompt_generator: PromptGenerator, llm: Llm

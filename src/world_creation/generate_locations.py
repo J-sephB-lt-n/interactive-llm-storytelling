@@ -18,9 +18,9 @@ def generate_locations(
     n_locations: int, prompt_generator: PromptGenerator, llm: Llm
 ) -> list[Location]:
     logger.info("Generating location names")
-    raw_response: str = llm.respond(
-        prompt_generator.generate_location_names(n_locations)
-    )
+    prompt: str = prompt_generator.generate_location_names(n_locations)
+    logger.debug('Prompt:\n"%s"', prompt)
+    raw_response: str = llm.respond(prompt)
     location_strings: list[str] = [
         remove_punctuation(x) for x in re.split(r"\d+", raw_response) if len(x) > 5
     ]
